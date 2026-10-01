@@ -45,6 +45,7 @@ const variedPrices = [
 ];
 
 const catalogData = [];
+const imageByProductName = {};
 let indexCount = 0;
 
 finishes.forEach((finish) => {
@@ -52,6 +53,8 @@ finishes.forEach((finish) => {
         const title = `${finish} ${type}`;
         const itemPrice = variedPrices[indexCount % variedPrices.length];
         const imageName = imagePool[indexCount % imagePool.length];
+
+        imageByProductName[title] = imageName;
 
         catalogData.push({
             name: title,
@@ -76,16 +79,20 @@ function renderCatalog() {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
-    grid.innerHTML = catalogData.map((item) => `
-        <article class="product-card">
-            <div class="product-image-wrap">
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
-            </div>
-            <h3 class="product-title">${item.name}</h3>
-            <p class="product-desc">${item.description}</p>
-            <div class="product-price">${formatCurrency(item.price)}</div>
-        </article>
-    `).join('');
+    grid.innerHTML = catalogData.map((item) => {
+        const matchedImage = imageByProductName[item.name] || item.image;
+
+        return `
+            <article class="product-card">
+                <div class="product-image-wrap">
+                    <img src="${matchedImage}" alt="${item.name}" loading="lazy">
+                </div>
+                <h3 class="product-title">${item.name}</h3>
+                <p class="product-desc">${item.description}</p>
+                <div class="product-price">${formatCurrency(item.price)}</div>
+            </article>
+        `;
+    }).join('');
 }
 
 document.addEventListener('DOMContentLoaded', renderCatalog);
