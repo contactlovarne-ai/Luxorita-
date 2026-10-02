@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxorita — Vintage High Jewelry Masterworks</title>
+    <title>Luxorita — High Jewelry Masterworks</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
@@ -13,15 +13,100 @@
             <div class="ornament-top">❦</div>
             <h1>LUXORITA</h1>
             <p class="tagline">Haute Joaillerie d'Exception</p>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#" onclick="showPage('catalog')">Catalog</a></li>
+                    <li><a href="#" onclick="showPage('about')">About</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+            </nav>
             <div class="ornament-bottom"></div>
         </header>
 
         <main class="catalog-wrapper">
-            <section class="product-grid" id="product-grid" aria-label="Luxury jewelry catalog"></section>
+            <!-- Catalog Page -->
+            <section id="catalog-page" class="page-content active">
+                <section class="product-grid" id="product-grid" aria-label="Luxury jewelry catalog"></section>
+            </section>
+
+            <!-- About Page -->
+            <section id="about-page" class="page-content">
+                <div class="content-section">
+                    <h2>About Luxorita</h2>
+                    <p>
+                        Luxorita stands as a beacon of exceptional craftsmanship in haute joaillerie. Each piece in our collection 
+                        is meticulously handcrafted by master artisans, featuring exquisite frameworks adorned with fine diamonds 
+                        and precious gemstones. Our commitment to excellence ensures that every creation transcends time, embodying 
+                        elegance, sophistication, and unparalleled quality.
+                    </p>
+                    <p>
+                        We specialize in creating bespoke high jewelry that tells your story. With access to the finest materials 
+                        including 24K gold in various hues, our artisans blend traditional techniques with contemporary design 
+                        sensibilities to produce timeless masterpieces.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact Page -->
+            <section id="contact-page" class="page-content">
+                <div class="content-section">
+                    <h2>Contact Us</h2>
+                    <p class="contact-info">
+                        <strong>Email:</strong> <a href="mailto:contactluxorita@gmail.com">contactluxorita@gmail.com</a>
+                    </p>
+                    <p class="contact-info">
+                        We welcome your inquiries about our collections, custom commissions, and special orders. 
+                        Reach out to us to discuss your jewelry aspirations.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Checkout Modal -->
+            <div id="checkout-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeCheckout()">&times;</span>
+                    <h2>Checkout</h2>
+                    
+                    <div id="checkout-product" class="checkout-item">
+                        <img id="checkout-image" src="" alt="">
+                        <h3 id="checkout-title"></h3>
+                        <p id="checkout-price"></p>
+                    </div>
+
+                    <div class="payment-section">
+                        <h3>Bank Account Payment Details</h3>
+                        <div class="bank-details">
+                            <p><strong>Account Number:</strong> 4890 0101 0059 1001</p>
+                            <p><strong>Valid Through:</strong> 11/26</p>
+                            <p><strong>CVV:</strong> 128</p>
+                        </div>
+                        <p class="payment-instruction">
+                            Please transfer the amount shown above to the bank account details provided. 
+                            Once payment is received and verified, your order will be processed and shipped.
+                        </p>
+                    </div>
+
+                    <form id="checkout-form" class="checkout-form">
+                        <label for="buyer-name">Full Name *</label>
+                        <input type="text" id="buyer-name" placeholder="Your full name" required>
+
+                        <label for="buyer-email">Email *</label>
+                        <input type="email" id="buyer-email" placeholder="Your email" required>
+
+                        <label for="buyer-address">Shipping Address *</label>
+                        <textarea id="buyer-address" placeholder="Your complete shipping address" rows="3" required></textarea>
+
+                        <label for="buyer-phone">Phone Number *</label>
+                        <input type="tel" id="buyer-phone" placeholder="Your phone number" required>
+
+                        <button type="button" onclick="submitOrder()" class="checkout-btn">Confirm Order</button>
+                    </form>
+                </div>
+            </div>
         </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 Luxorita. Bespoke Vintage-Structured High Jewelry.</p>
+            <p>&copy; 2026 Luxorita. Bespoke High Jewelry.</p>
         </footer>
     </div>
 
