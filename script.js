@@ -47,6 +47,7 @@ const variedPrices = [
 const catalogData = [];
 const imageByProductName = {};
 let indexCount = 0;
+let currentOrder = {};
 
 finishes.forEach((finish) => {
     itemTypes.forEach((type) => {
@@ -75,12 +76,33 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
+function showPage(pageName) {
+    event.preventDefault();
+    // Hide all pages
+    const pages = document.querySelectorAll('.page-content');
+    pages.forEach(page => page.classList.remove('active'));
+    
+    // Show selected page
+    const selectedPage = document.getElementById(pageName + '-page');
+    if (selectedPage) {
+        selectedPage.classList.add('active');
+    }
+}
+
 function renderCatalog() {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
     grid.innerHTML = catalogData.map((item) => {
         const matchedImage = imageByProductName[item.name] || item.image;
+        const isPriceHigh = item.price > 2200;
+        
+        let actionButton = '';
+        if (isPriceHigh) {
+            actionButton = `<button class="ask-price-btn" onclick="askForPrice(event, '${item.name.replace(/'/g, "\\'")}', ${item.price})">Ask for Price</button>`;
+        } else {
+            actionButton = `<button class="buy-btn" onclick="openCheckout(event, '${item.name.replace(/'/g, "\\'")}', '${matchedImage}', ${item.price})">Buy Now</button>`;
+        }
 
         return `
             <article class="product-card">
@@ -90,9 +112,114 @@ function renderCatalog() {
                 <h3 class="product-title">${item.name}</h3>
                 <p class="product-desc">${item.description}</p>
                 <div class="product-price">${formatCurrency(item.price)}</div>
+                <div class="product-action">
+                    ${actionButton}
+                </div>
             </article>
         `;
     }).join('');
 }
 
-document.addEventListener('DOMContentLoaded', renderCatalog);
+function openCheckout(event, productName, productImage, price) {
+    event.preventDefault();
+    
+    const modal = document.getElementById('checkout-modal');
+    document.getElementById('checkout-image').src = productImage;
+    document.getElementById('checkout-title').textContent = productName;
+    document.getElementById('checkout-price').textContent = formatCurrency(price);
+    
+    // Store order data
+    currentOrder = {
+        productName: productName,
+        productImage: productImage,
+        price: price
+    };
+    
+    modal.classList.add('active');
+}
+
+function closeCheckout() {
+    const modal = document.getElementById('checkout-modal');
+    modal.classList.remove('active');
+    // Reset form
+    const form = document.getElementById('checkout-form');
+    if (form) {
+        form.reset();
+    }
+}
+
+function askForPrice(event, productName, price) {
+    event.preventDefault();
+    const email = 'contactluxorita@gmail.com';
+    const subject = `Price Inquiry: ${productName}`;
+    const body = `Hello Luxorita,\n\nI am interested in inquiring about the price of the following item:\n\nProduct: ${productName}\nListed Amount: ${formatCurrency(price)}\n\nPlease provide me with more details.\n\nThank you`;
+    
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function submitOrder(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    
+    const buyerName = document.getElementById('buyer-name').value.trim();
+    const buyerEmail = document.getElementById('buyer-email').value.trim();
+    const buyerAddress = document.getElementById('buyer-address').value.trim();
+    const buyerPhone = document.getElementById('buyer-phone').value.trim();
+
+    // Validation
+    if (!buyerName || !buyerEmail || !buyerAddress || !buyerPhone) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    // Email pattern validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(buyerEmail)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    const productName = currentOrder.productName;
+    const price = currentOrder.price;
+
+    // Prepare order details
+    const orderDetails = `ORDER CONFIRMATION\n===================\n\nProduct: ${productName}\nPrice: ${formatCurrency(price)}\n\nBUYER INFORMATION:\nName: ${buyerName}\nEmail: ${buyerEmail}\nPhone: ${buyerPhone}\nAddress: ${buyerAddress}\n\nPAYMENT DETAILS:\nAccount Number: 4890 0101 0059 1001\nValid Through: 11/26\nCVV: 128\n\nPlease transfer ${formatCurrency(price)} to the bank account above.\nOnce payment is received and verified, your order will be shipped.\n\nThank you for your purchase!`;
+
+    // Send email to buyer
+    const buyerSubject = `Order Confirmation - ${productName}`;
+    
+    // Create mailto link for buyer confirmation
+    const buyerMailto = `mailto:${buyerEmail}?subject=${encodeURIComponent(buyerSubject)}&body=${encodeURIComponent(orderDetails)}`;
+
+    // Send to Luxorita
+    const luxoritaEmail = 'contactluxorita@gmail.com';
+    const luxoritaSubject = `New Order: ${productName}`;
+    const luxoritaBody = `NEW ORDER RECEIVED\n\n${orderDetails}\n\nOrder Time: ${new Date().toLocaleString()}`;
+    const luxoritaMailto = `mailto:${luxoritaEmail}?subject=${encodeURIComponent(luxoritaSubject)}&body=${encodeURIComponent(luxoritaBody)}`;
+
+    // Open buyer confirmation email
+    window.open(buyerMailto, '_blank');
+    
+    // Open Luxorita notification email
+    setTimeout(() => {
+        window.open(luxoritaMailto, '_blank');
+    }, 500);
+
+    alert(`Order confirmed! Payment details have been sent to your email.\n\nAmount: ${formatCurrency(price)}\nAccount: 4890 0101 0059 1001\n\nPlease complete the bank transfer to finalize your order.`);
+    closeCheckout();
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('checkout-modal');
+    if (event.target === modal) {
+        closeCheckout();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderCatalog();
+    // Set catalog as default page
+    showPage('catalog');
+});
