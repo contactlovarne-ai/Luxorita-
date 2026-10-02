@@ -60,6 +60,34 @@ body {
     font-style: italic;
     letter-spacing: 0.15em;
     margin-top: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.navbar {
+    margin: 1.5rem 0 0 0;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.navbar a:hover {
+    color: var(--gold-primary);
 }
 
 .ornament-bottom {
@@ -73,10 +101,38 @@ body {
     padding: 0 1rem;
 }
 
+/* Page Content Display */
+.page-content {
+    display: none;
+}
+
+.page-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Product Grid - 2 Columns */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .product-card {
@@ -146,6 +202,246 @@ body {
     font-size: 1.2rem;
     color: var(--gold-primary);
     letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.product-action {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.buy-btn, .ask-price-btn {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--gold-primary);
+    background: transparent;
+    color: var(--gold-light);
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.08em;
+    flex: 1;
+}
+
+.buy-btn:hover {
+    background: var(--gold-primary);
+    color: #0d0c0a;
+}
+
+.ask-price-btn {
+    background: transparent;
+}
+
+.ask-price-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--gold-light);
+}
+
+/* Content Sections */
+.content-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(20, 18, 15, 0.5);
+    border: 1px solid var(--border-vintage);
+}
+
+.content-section h2 {
+    font-family: var(--font-decorative);
+    color: var(--gold-light);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.contact-info {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.contact-info a {
+    color: var(--gold-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--gold-light);
+}
+
+/* Modal/Checkout */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--bg-parchment);
+    border: 2px solid var(--gold-primary);
+    padding: 2rem;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold-primary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--gold-light);
+}
+
+.modal-content h2 {
+    font-family: var(--font-decorative);
+    color: var(--gold-light);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+.checkout-item {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--border-vintage);
+    background: rgba(20, 18, 15, 0.5);
+}
+
+.checkout-item img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-vintage);
+}
+
+.checkout-item h3 {
+    font-family: var(--font-decorative);
+    color: var(--gold-light);
+    margin: 0.5rem 0;
+}
+
+.checkout-item p {
+    color: var(--gold-primary);
+    font-size: 1.2rem;
+    font-family: var(--font-decorative);
+    margin: 0.5rem 0;
+}
+
+.payment-section {
+    background: rgba(20, 18, 15, 0.5);
+    border: 1px solid var(--border-vintage);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.payment-section h3 {
+    color: var(--gold-light);
+    margin-top: 0;
+}
+
+.bank-details {
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid var(--border-vintage);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.bank-details p {
+    margin: 0.5rem 0;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.payment-instruction {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.checkout-form label {
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+    background: rgba(20, 18, 15, 0.8);
+    border: 1px solid var(--border-vintage);
+    color: var(--text-color);
+    padding: 0.8rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+    outline: none;
+    border-color: var(--gold-primary);
+}
+
+.checkout-form input::placeholder,
+.checkout-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.checkout-btn {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    border: none;
+    color: #0d0c0a;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.checkout-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
 .site-footer {
