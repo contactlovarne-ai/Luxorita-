@@ -13,23 +13,59 @@ const products = [
     { name: "Pure 24k white gold brooch set with fine diamond", price: 0, image: "IMG-20261001-WA0005.jpg" },
     { name: "Pure 24k black gold set with fine diamond", price: 0, image: "IMG-20261001-WA0009.jpg" },
     
-    // Earrings & Bracelets
-    { name: "Pure 24k white gold earring", price: 0, image: "IMG-20261001-WA1377.jpg" },
-    { name: "Pure 24k yellow gold bracelets set with fine diamond", price: 0, image: "IMG-20261001-WA0010.jpg" },
-    { name: "Pure 24k white gold earrings set with fine diamond", price: 0, image: "IMG-20261001-WA0417.jpg" },
-    { name: "Pure 24k pink gold bracelet set with fine diamond", price: 0, image: "IMG-20261001-WA0914.jpg" },
-    { name: "Pure 24k pink gold bracelet", price: 0, image: "IMG-20261001-WA1567.jpg" },
+    // Position 11 (10th last): Pure yellow gold bracelet set with diamonds
+    { name: "Pure yellow gold bracelet set with diamonds", price: 0, image: "IMG-20261001-WA0010.jpg" },
     
-    // Bracelets & Necklaces
-    { name: "Pure 24k white gold bracelet", price: 0, image: "IMG-20261001-WA1851.jpg" },
+    // Position 12 (11th last): Pure 24k white gold earrings
+    { name: "Pure 24k white gold earrings", price: 0, image: "IMG-20261001-WA0417.jpg" },
+    
+    // Position 13 (12th last): Pure 24k pink gold ring
+    { name: "Pure 24k pink gold ring", price: 0, image: "IMG-20261001-WA0914.jpg" },
+    
+    // Position 14 (13th last): Pure black gold brooch set with diamonds
+    { name: "Pure black gold brooch set with diamonds", price: 0, image: "IMG-20261001-WA1363.jpg" },
+    
+    // Position 15 (14th last): Pure 24k yellow gold brooch set with diamonds
+    { name: "Pure 24k yellow gold brooch set with diamonds", price: 0, image: "IMG-20261001-WA1377.jpg" },
+    
+    // Position 16 (15th last): Pure 24k pink gold brooch set with diamonds
+    { name: "Pure 24k pink gold brooch set with diamonds", price: 0, image: "IMG-20261001-WA1472.jpg" },
+    
+    // Position 17 (16th last): Pure 24k rose gold brooch set with diamonds
+    { name: "Pure 24k rose gold brooch set with diamonds", price: 0, image: "IMG-20261001-WA1567.jpg" },
+    
+    // Position 18 (17th last): Pure 24k white gold brooch set with diamonds
+    { name: "Pure 24k white gold brooch set with diamonds", price: 0, image: "IMG-20261001-WA1851.jpg" },
+    
+    // Position 19 (18th last): Don't change
     { name: "Pure 24k pink gold necklace", price: 0, image: "IMG-20261001-WA2469.jpg" },
-    { name: "Pure 24k black gold necklace", price: 0, image: "IMG-20261001-WA2491.jpg" },
     
-    // Rings & Final Items
-    { name: "Pure 24k white gold ring", price: 0, image: "IMG-20261001-WA2661.jpg" },
-    { name: "Pure 24k yellow gold earrings set with fine diamond", price: 0, image: "IMG-20261001-WA1363.jpg" },
-    { name: "Pure 24k yellow gold necklace", price: 0, image: "IMG-20261001-WA2564.jpg" },
-    { name: "Pure 24k black gold ring", price: 0, image: "IMG-20261001-WA2837.jpg" }
+    // Position 20 (19th last): Pure 24k black gold brooch
+    { name: "Pure 24k black gold brooch", price: 0, image: "IMG-20261001-WA2491.jpg" },
+    
+    // Position 21 (2nd last): Pure 24k yellow gold ring set with diamonds
+    { name: "Pure 24k yellow gold ring set with diamonds", price: 0, image: "IMG-20261001-WA2564.jpg" },
+    
+    // Position 22 (3rd last): Pure 24k white gold bracelet set with diamonds
+    { name: "Pure 24k white gold bracelet set with diamonds", price: 0, image: "IMG-20261001-WA2661.jpg" },
+    
+    // Position 23 (4th last): Pure 24k yellow gold necklace
+    { name: "Pure 24k yellow gold necklace", price: 0, image: "IMG-20261001-WA2837.jpg" },
+    
+    // Position 24 (5th last): Pure white gold ring
+    { name: "Pure white gold ring", price: 0, image: "IMG-20261001-WA0000.jpg" },
+    
+    // Position 25 (6th last): Pure 24k black gold necklace set with diamonds
+    { name: "Pure 24k black gold necklace set with diamonds", price: 0, image: "IMG-20261001-WA0001.jpg" },
+    
+    // Position 26 (7th last): Pure 24k pink gold necklace
+    { name: "Pure 24k pink gold necklace", price: 0, image: "IMG-20261001-WA0002.jpg" },
+    
+    // Position 27 (8th last): Pure 24k white gold bracelet
+    { name: "Pure 24k white gold bracelet", price: 0, image: "IMG-20261001-WA0003.jpg" },
+    
+    // Position 28 (9th last): Pure white gold earrings set with diamonds
+    { name: "Pure white gold earrings set with diamonds", price: 0, image: "IMG-20261001-WA0004.jpg" }
 ];
 
 function formatCurrency(amount) {
