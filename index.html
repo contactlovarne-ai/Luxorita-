@@ -15,74 +15,66 @@
             <p class="tagline">Haute Joaillerie d'Exception</p>
             <nav class="navbar">
                 <ul>
-                    <li><a href="#" onclick="showPage('catalog')">Catalog</a></li>
-                    <li><a href="#" onclick="showPage('about')">About</a></li>
-                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                    <li><a href="#" onclick="showPage('catalog'); return false;">Catalog</a></li>
+                    <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+                    <li><a href="#" onclick="showPage('contact'); return false;">Contact</a></li>
                 </ul>
             </nav>
             <div class="ornament-bottom"></div>
         </header>
 
         <main class="catalog-wrapper">
-            <!-- Catalog Page -->
             <section id="catalog-page" class="page-content active">
                 <section class="product-grid" id="product-grid" aria-label="Luxury jewelry catalog"></section>
             </section>
 
-            <!-- About Page -->
             <section id="about-page" class="page-content">
                 <div class="content-section">
                     <h2>About Luxorita</h2>
                     <p>
-                        Luxorita stands as a beacon of exceptional craftsmanship in haute joaillerie. Each piece in our collection 
-                        is meticulously handcrafted by master artisans, featuring exquisite frameworks adorned with fine diamonds 
-                        and precious gemstones. Our commitment to excellence ensures that every creation transcends time, embodying 
-                        elegance, sophistication, and unparalleled quality.
+                        Luxorita presents refined high-jewelry masterpieces crafted in 24K gold and natural unheated diamonds.
+                        Each piece is meticulously designed and assembled by master artisans, combining heritage craftsmanship
+                        with contemporary elegance. Our collection is curated for collectors seeking exceptional beauty,
+                        extraordinary detail, and timeless value.
                     </p>
                     <p>
-                        We specialize in creating bespoke high jewelry that tells your story. With access to the finest materials 
-                        including 24K gold in various hues, our artisans blend traditional techniques with contemporary design 
-                        sensibilities to produce timeless masterpieces.
+                        Every creation is a statement of artistry and individuality. The collection is thoughtfully composed to
+                        reflect the rare elegance of precious metals, intricate frameworks, and carefully selected stones.
                     </p>
                 </div>
             </section>
 
-            <!-- Contact Page -->
             <section id="contact-page" class="page-content">
                 <div class="content-section">
-                    <h2>Contact Us</h2>
+                    <h2>Contact</h2>
                     <p class="contact-info">
-                        <strong>Email:</strong> <a href="mailto:contactluxorita@gmail.com">contactluxorita@gmail.com</a>
-                    </p>
-                    <p class="contact-info">
-                        We welcome your inquiries about our collections, custom commissions, and special orders. 
-                        Reach out to us to discuss your jewelry aspirations.
+                        Please use the inquiry form from any product card to request pricing, availability, and product details.
+                        We keep the process fully on-site and private for the customer experience.
                     </p>
                 </div>
             </section>
 
-            <!-- Checkout Modal -->
             <div id="checkout-modal" class="modal">
                 <div class="modal-content">
                     <span class="close-btn" onclick="closeCheckout()">&times;</span>
-                    <h2>Checkout</h2>
-                    
+                    <h2>Product Inquiry</h2>
+
                     <div id="checkout-product" class="checkout-item">
                         <img id="checkout-image" src="" alt="">
                         <h3 id="checkout-title"></h3>
-                        <p id="checkout-price"></p>
+                        <p id="checkout-price">Contact for Price</p>
                     </div>
 
                     <div class="payment-section">
-                        <h3>Bank Account Payment Details</h3>
+                        <h3>Private Inquiry</h3>
                         <div class="bank-details">
-                            <p><strong>Account Number:</strong> 4890 0101 0059 1001</p>
+                            <p><strong>Payment option:</strong> Private bank transfer after confirmation</p>
+                            <p><strong>Account:</strong> 4890 0101 0059 1001</p>
                             <p><strong>Valid Through:</strong> 11/26</p>
                             <p><strong>CVV:</strong> 128</p>
                         </div>
                         <p class="payment-instruction">
-                            Please transfer the amount shown above to the bank account details provided. 
-                            Once payment is received and verified, your order will be processed and shipped.
+                            Complete the form below to request pricing and availability. Payments can be handled privately after confirmation.
                         </p>
                     </div>
 
@@ -99,7 +91,7 @@
                         <label for="buyer-phone">Phone Number *</label>
                         <input type="tel" id="buyer-phone" placeholder="Your phone number" required>
 
-                        <button type="button" onclick="submitOrder()" class="checkout-btn">Confirm Order</button>
+                        <button type="button" onclick="submitOrder(event)" class="checkout-btn">Confirm Inquiry</button>
                     </form>
                 </div>
             </div>
