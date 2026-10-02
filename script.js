@@ -1,72 +1,39 @@
-const finishes = [
-    "Pure 24K Yellow Gold",
-    "Pure 24K White Gold",
-    "Pure 24K Pink Gold",
-    "Pure 24K Rose Gold",
-    "Pure 24K Black Gold"
+const products = [
+    // Brooches
+    { name: "Pure 24k pink gold brooch", price: 1850, image: "IMG-20261001-WA0000.jpg" },
+    { name: "Pure 24k white gold brooch", price: 2100, image: "IMG-20261001-WA0001.jpg" },
+    { name: "Pure 24k rose gold brooch", price: 1950, image: "IMG-20261001-WA0002.jpg" },
+    { name: "Pure 24k green gold brooch", price: 2200, image: "IMG-20261001-WA0003.jpg" },
+    { name: "Pure 24k yellow gold brooch", price: 1800, image: "IMG-20261001-WA0004.jpg" },
+    { name: "Pure 24k white gold brooch set with fine diamond", price: 68000, image: "IMG-20261001-WA0005.jpg" },
+
+    // Sets with fine diamond
+    { name: "Pure 24k yellow gold set with fine diamond", price: 145000, image: "IMG-20261001-WA0006.jpg" },
+    { name: "Pure 24k white gold set with fine diamond", price: 290000, image: "IMG-20261001-WA0007.jpg" },
+    { name: "Pure 24k rose gold set with fine diamond", price: 450000, image: "IMG-20261001-WA0008.jpg" },
+    { name: "Pure 24k black gold set with fine diamond", price: 720000, image: "IMG-20261001-WA0009.jpg" },
+    { name: "Pure 24k yellow gold bracelets set with fine diamond", price: 980000, image: "IMG-20261001-WA0010.jpg" },
+    { name: "Pure 24k white gold earrings set with fine diamond", price: 1350000, image: "IMG-20261001-WA0417.jpg" },
+    { name: "Pure 24k pink gold bracelet set with fine diamond", price: 1950000, image: "IMG-20261001-WA0914.jpg" },
+    { name: "Pure 24k yellow gold earrings set with fine diamond", price: 2550000, image: "IMG-20261001-WA1363.jpg" },
+
+    // Earrings
+    { name: "Pure 24k white gold earring", price: 1650, image: "IMG-20261001-WA1377.jpg" },
+    { name: "Pure 24k pink gold earrings", price: 1750, image: "IMG-20261001-WA1472.jpg" },
+
+    // Bracelets
+    { name: "Pure 24k pink gold bracelet", price: 2000, image: "IMG-20261001-WA1567.jpg" },
+    { name: "Pure 24k white gold bracelet", price: 2150, image: "IMG-20261001-WA1851.jpg" },
+
+    // Necklaces
+    { name: "Pure 24k pink gold necklace", price: 2300, image: "IMG-20261001-WA2469.jpg" },
+    { name: "Pure 24k black gold necklace", price: 2400, image: "IMG-20261001-WA2491.jpg" },
+    { name: "Pure 24k yellow gold necklace", price: 2250, image: "IMG-20261001-WA2564.jpg" },
+
+    // Rings
+    { name: "Pure 24k white gold ring", price: 1500, image: "IMG-20261001-WA2661.jpg" },
+    { name: "Pure 24k black gold ring", price: 1600, image: "IMG-20261001-WA2837.jpg" }
 ];
-
-const itemTypes = ["Earrings", "Bracelet", "Necklace", "Brooch", "Ring"];
-
-const imagePool = [
-    "IMG-20261001-WA0000.jpg",
-    "IMG-20261001-WA0001.jpg",
-    "IMG-20261001-WA0002.jpg",
-    "IMG-20261001-WA0003.jpg",
-    "IMG-20261001-WA0004.jpg",
-    "IMG-20261001-WA0005.jpg",
-    "IMG-20261001-WA0006.jpg",
-    "IMG-20261001-WA0007.jpg",
-    "IMG-20261001-WA0008.jpg",
-    "IMG-20261001-WA0009.jpg",
-    "IMG-20261001-WA0010.jpg",
-    "IMG-20261001-WA0417.jpg",
-    "IMG-20261001-WA0914.jpg",
-    "IMG-20261001-WA1363.jpg",
-    "IMG-20261001-WA1377.jpg",
-    "IMG-20261001-WA1472.jpg",
-    "IMG-20261001-WA1567.jpg",
-    "IMG-20261001-WA1851.jpg",
-    "IMG-20261001-WA2469.jpg",
-    "IMG-20261001-WA2491.jpg",
-    "IMG-20261001-WA2564.jpg",
-    "IMG-20261001-WA2661.jpg",
-    "IMG-20261001-WA2837.jpg",
-    "IMG-20261001-WA3294.jpg",
-    "IMG-20261001-WA3310.jpg"
-];
-
-const variedPrices = [
-    2100, 2200, 68000, 145000, 290000,
-    450000, 720000, 980000, 1350000, 1950000,
-    2550000, 3200000, 4100000, 4900000, 5600000,
-    6350000, 7100000, 7650000, 8300000, 8750000,
-    380000, 890000, 1420000, 4850000, 9000000
-];
-
-const catalogData = [];
-const imageByProductName = {};
-let indexCount = 0;
-let currentOrder = {};
-
-finishes.forEach((finish) => {
-    itemTypes.forEach((type) => {
-        const title = `${finish} ${type}`;
-        const itemPrice = variedPrices[indexCount % variedPrices.length];
-        const imageName = imagePool[indexCount % imagePool.length];
-
-        imageByProductName[title] = imageName;
-
-        catalogData.push({
-            name: title,
-            description: "Handcrafted framework exquisitely set with fine diamonds.",
-            price: itemPrice,
-            image: imageName
-        });
-
-        indexCount++;
-    });
-});
 
 function formatCurrency(amount) {
     return new Intl.NumberFormat('en-US', {
@@ -77,7 +44,9 @@ function formatCurrency(amount) {
 }
 
 function showPage(pageName) {
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
     // Hide all pages
     const pages = document.querySelectorAll('.page-content');
     pages.forEach(page => page.classList.remove('active'));
@@ -93,24 +62,23 @@ function renderCatalog() {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
-    grid.innerHTML = catalogData.map((item) => {
-        const matchedImage = imageByProductName[item.name] || item.image;
+    grid.innerHTML = products.map((item) => {
         const isPriceHigh = item.price > 2200;
         
         let actionButton = '';
         if (isPriceHigh) {
             actionButton = `<button class="ask-price-btn" onclick="askForPrice(event, '${item.name.replace(/'/g, "\\'")}', ${item.price})">Ask for Price</button>`;
         } else {
-            actionButton = `<button class="buy-btn" onclick="openCheckout(event, '${item.name.replace(/'/g, "\\'")}', '${matchedImage}', ${item.price})">Buy Now</button>`;
+            actionButton = `<button class="buy-btn" onclick="openCheckout(event, '${item.name.replace(/'/g, "\\'")}', '${item.image}', ${item.price})">Buy Now</button>`;
         }
 
         return `
             <article class="product-card">
                 <div class="product-image-wrap">
-                    <img src="${matchedImage}" alt="${item.name}" loading="lazy">
+                    <img src="${item.image}" alt="${item.name}" loading="lazy">
                 </div>
                 <h3 class="product-title">${item.name}</h3>
-                <p class="product-desc">${item.description}</p>
+                <p class="product-desc">Handcrafted framework exquisitely set with fine diamonds.</p>
                 <div class="product-price">${formatCurrency(item.price)}</div>
                 <div class="product-action">
                     ${actionButton}
@@ -129,7 +97,7 @@ function openCheckout(event, productName, productImage, price) {
     document.getElementById('checkout-price').textContent = formatCurrency(price);
     
     // Store order data
-    currentOrder = {
+    window.currentOrder = {
         productName: productName,
         productImage: productImage,
         price: price
@@ -180,8 +148,9 @@ function submitOrder(event) {
         return;
     }
 
-    const productName = currentOrder.productName;
-    const price = currentOrder.price;
+    const order = window.currentOrder;
+    const productName = order.productName;
+    const price = order.price;
 
     // Prepare order details
     const orderDetails = `ORDER CONFIRMATION\n===================\n\nProduct: ${productName}\nPrice: ${formatCurrency(price)}\n\nBUYER INFORMATION:\nName: ${buyerName}\nEmail: ${buyerEmail}\nPhone: ${buyerPhone}\nAddress: ${buyerAddress}\n\nPAYMENT DETAILS:\nAccount Number: 4890 0101 0059 1001\nValid Through: 11/26\nCVV: 128\n\nPlease transfer ${formatCurrency(price)} to the bank account above.\nOnce payment is received and verified, your order will be shipped.\n\nThank you for your purchase!`;
