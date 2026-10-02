@@ -1,10 +1,10 @@
 const products = [
-    { name: "Pure 24K White Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0000.jpg" },
+    { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0000.jpg" },
     { name: "Pure 24K White Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0001.jpg" },
     { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0002.jpg" },
     { name: "Pure 24K Black Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0003.jpg" },
     { name: "Pure 24K Yellow Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "$2,200 USD", image: "IMG-20261001-WA0004.jpg" },
-    { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0005.jpg" },
+    { name: "Pure 24K Pink Gold Brooch (Diamonds), Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0005.jpg" },
     { name: "Pure 24K Rose Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0006.jpg" },
     { name: "Pure 24K White Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0007.jpg" },
     { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0008.jpg" },
@@ -46,6 +46,11 @@ function renderCatalog() {
     if (!grid) return;
 
     grid.innerHTML = products.map((item) => {
+        const hasPrice = item.price !== "Contact for Price";
+        const buttonHTML = hasPrice 
+            ? `<button class="checkout-btn" onclick="openCheckout(event, '${item.name.replace(/'/g, "\\'")}', '${item.image}', '${item.price}')">Proceed to Checkout</button>`
+            : `<button class="contact-price-btn" onclick="openContactForm(event, '${item.name.replace(/'/g, "\\'")}', '${item.image}')">Contact for Price</button>`;
+        
         return `
             <article class="product-card">
                 <div class="product-image-wrap">
@@ -54,14 +59,31 @@ function renderCatalog() {
                 <h3 class="product-title">${item.name}</h3>
                 <div class="product-price-contact">${item.price}</div>
                 <div class="product-action">
-                    <button class="contact-price-btn" onclick="openContactForm(event, '${item.name.replace(/'/g, "\\'")}', '${item.image}', '${item.price}')">Contact for Price</button>
+                    ${buttonHTML}
                 </div>
             </article>
         `;
     }).join('');
 }
 
-function openContactForm(event, productName, productImage, productPrice) {
+function openContactForm(event, productName, productImage) {
+    event.preventDefault();
+    const modal = document.getElementById('checkout-modal');
+    document.getElementById('checkout-image').src = productImage;
+    document.getElementById('checkout-title').textContent = productName;
+    document.getElementById('checkout-price').textContent = 'Contact for Price';
+
+    window.currentOrder = {
+        productName: productName,
+        productImage: productImage,
+        productPrice: 'Contact for Price',
+        type: 'inquiry'
+    };
+
+    modal.classList.add('active');
+}
+
+function openCheckout(event, productName, productImage, productPrice) {
     event.preventDefault();
     const modal = document.getElementById('checkout-modal');
     document.getElementById('checkout-image').src = productImage;
@@ -72,7 +94,7 @@ function openContactForm(event, productName, productImage, productPrice) {
         productName: productName,
         productImage: productImage,
         productPrice: productPrice,
-        type: 'inquiry'
+        type: 'checkout'
     };
 
     modal.classList.add('active');
@@ -110,9 +132,12 @@ function submitOrder(event) {
 
     const productName = window.currentOrder ? window.currentOrder.productName : 'this item';
     const productPrice = window.currentOrder ? window.currentOrder.productPrice : 'Contact for Price';
+    const orderType = window.currentOrder ? window.currentOrder.type : 'inquiry';
+
+    const messageTitle = orderType === 'checkout' ? 'PAYMENT SUBMITTED SUCCESSFULLY' : 'INQUIRY SUBMITTED SUCCESSFULLY';
 
     const inquiryMessage = `
-✓ INQUIRY SUBMITTED SUCCESSFULLY
+✓ ${messageTitle}
 
 Product: ${productName}
 Price: ${productPrice}
@@ -123,7 +148,7 @@ Email: ${buyerEmail}
 Phone: ${buyerPhone}
 Address: ${buyerAddress}
 
-Your request is being reviewed in the Luxorita inquiry flow. Please remain on this website while the enquiry is processed.
+${orderType === 'checkout' ? 'Your payment is being processed. Please remain on this website while the transaction is completed.' : 'Your request is being reviewed in the Luxorita inquiry flow. Please remain on this website while the enquiry is processed.'}
 
 Thank you for your interest in our collection.
     `;
