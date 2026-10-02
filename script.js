@@ -18,8 +18,8 @@ const products = [
     { name: "White Gold (Bracelet), Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA1567.jpg" },
     { name: "Pink Gold (Necklace), Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA1851.jpg" },
     { name: "Pure 24K Black Gold Necklace, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2469.jpg" },
-    { name: "Black Gold (Bracelet), Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2491.jpg" },
-    { name: "Pure 24K Yellow Gold Ring Set with Diamonds, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2564.jpg" },
+    { name: "Pure 24K Black Gold Bracelet, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2491.jpg" },
+    { name: "Pure 24K Yellow Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2564.jpg" },
     { name: "Pure 24K Yellow Gold Necklace, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2661.jpg" },
     { name: "Pure 24K Black Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2837.jpg" },
     { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA3294.jpg" },
@@ -148,7 +148,7 @@ Email: ${buyerEmail}
 Phone: ${buyerPhone}
 Address: ${buyerAddress}
 
-${orderType === 'checkout' ? 'Your payment is being processed. Please remain on this website while the transaction is completed.' : 'Your request is being reviewed in the Luxorita inquiry flow. P[...]
+${orderType === 'checkout' ? 'Your payment is being processed. Please remain on this website while the transaction is completed.' : 'Your request is being reviewed in the Luxorita inquiry flow. Please wait for the confirmation message from the team.'}
 
 Thank you for your interest in our collection.
     `;
