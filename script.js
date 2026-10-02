@@ -65,10 +65,16 @@ function renderCatalog() {
     grid.innerHTML = products.map((item) => {
         const isPriceHigh = item.price > 2200;
         
+        let priceDisplay = '';
         let actionButton = '';
+        
         if (isPriceHigh) {
-            actionButton = `<button class="ask-price-btn" onclick="askForPrice(event, '${item.name.replace(/'/g, "\\'")}', ${item.price})">Ask for Price</button>`;
+            // Hide price for "Ask for Price" items
+            priceDisplay = `<div class="product-price-hidden">Contact for pricing</div>`;
+            actionButton = `<button class="ask-price-btn" onclick="openPriceInquiry(event, '${item.name.replace(/'/g, "\\'")}', ${item.price})">Ask for Price</button>`;
         } else {
+            // Show price for regular items
+            priceDisplay = `<div class="product-price">${formatCurrency(item.price)}</div>`;
             actionButton = `<button class="buy-btn" onclick="openCheckout(event, '${item.name.replace(/'/g, "\\'")}', '${item.image}', ${item.price})">Buy Now</button>`;
         }
 
@@ -79,7 +85,7 @@ function renderCatalog() {
                 </div>
                 <h3 class="product-title">${item.name}</h3>
                 <p class="product-desc">Handcrafted framework exquisitely set with fine diamonds.</p>
-                <div class="product-price">${formatCurrency(item.price)}</div>
+                ${priceDisplay}
                 <div class="product-action">
                     ${actionButton}
                 </div>
@@ -100,29 +106,42 @@ function openCheckout(event, productName, productImage, price) {
     window.currentOrder = {
         productName: productName,
         productImage: productImage,
-        price: price
+        price: price,
+        type: 'buy'
     };
     
+    modal.classList.add('active');
+}
+
+function openPriceInquiry(event, productName, price) {
+    event.preventDefault();
+    
+    const modal = document.getElementById('checkout-modal');
+    document.getElementById('checkout-image').src = '';
+    document.getElementById('checkout-title').textContent = productName;
+    document.getElementById('checkout-price').textContent = 'Price on Request';
+    
+    // Store order data for price inquiry
+    window.currentOrder = {
+        productName: productName,
+        price: price,
+        type: 'inquiry'
+    };
+    
+    // Change form to show it's a price inquiry
+    document.getElementById('checkout-modal').dataset.inquiryMode = 'true';
     modal.classList.add('active');
 }
 
 function closeCheckout() {
     const modal = document.getElementById('checkout-modal');
     modal.classList.remove('active');
+    delete modal.dataset.inquiryMode;
     // Reset form
     const form = document.getElementById('checkout-form');
     if (form) {
         form.reset();
     }
-}
-
-function askForPrice(event, productName, price) {
-    event.preventDefault();
-    const email = 'contactluxorita@gmail.com';
-    const subject = `Price Inquiry: ${productName}`;
-    const body = `Hello Luxorita,\n\nI am interested in inquiring about the price of the following item:\n\nProduct: ${productName}\nListed Amount: ${formatCurrency(price)}\n\nPlease provide me with more details.\n\nThank you`;
-    
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 function submitOrder(event) {
@@ -151,32 +170,46 @@ function submitOrder(event) {
     const order = window.currentOrder;
     const productName = order.productName;
     const price = order.price;
+    const isInquiry = order.type === 'inquiry';
 
-    // Prepare order details
-    const orderDetails = `ORDER CONFIRMATION\n===================\n\nProduct: ${productName}\nPrice: ${formatCurrency(price)}\n\nBUYER INFORMATION:\nName: ${buyerName}\nEmail: ${buyerEmail}\nPhone: ${buyerPhone}\nAddress: ${buyerAddress}\n\nPAYMENT DETAILS:\nAccount Number: 4890 0101 0059 1001\nValid Through: 11/26\nCVV: 128\n\nPlease transfer ${formatCurrency(price)} to the bank account above.\nOnce payment is received and verified, your order will be shipped.\n\nThank you for your purchase!`;
+    if (isInquiry) {
+        // Price Inquiry - show confirmation on-site only
+        const inquiryMessage = `
+Price Inquiry Request Submitted Successfully!
 
-    // Send email to buyer
-    const buyerSubject = `Order Confirmation - ${productName}`;
-    
-    // Create mailto link for buyer confirmation
-    const buyerMailto = `mailto:${buyerEmail}?subject=${encodeURIComponent(buyerSubject)}&body=${encodeURIComponent(orderDetails)}`;
+Product: ${productName}
+Your Name: ${buyerName}
+Your Email: ${buyerEmail}
+Phone: ${buyerPhone}
 
-    // Send to Luxorita
-    const luxoritaEmail = 'contactluxorita@gmail.com';
-    const luxoritaSubject = `New Order: ${productName}`;
-    const luxoritaBody = `NEW ORDER RECEIVED\n\n${orderDetails}\n\nOrder Time: ${new Date().toLocaleString()}`;
-    const luxoritaMailto = `mailto:${luxoritaEmail}?subject=${encodeURIComponent(luxoritaSubject)}&body=${encodeURIComponent(luxoritaBody)}`;
+We will contact you shortly with detailed pricing information.
+Thank you for your interest in Luxorita!
+        `;
+        
+        alert(inquiryMessage);
+        closeCheckout();
+    } else {
+        // Regular Purchase - show bank transfer details on-site only
+        const checkoutMessage = `
+Order Confirmed! 
 
-    // Open buyer confirmation email
-    window.open(buyerMailto, '_blank');
-    
-    // Open Luxorita notification email
-    setTimeout(() => {
-        window.open(luxoritaMailto, '_blank');
-    }, 500);
+Product: ${productName}
+Amount: ${formatCurrency(price)}
 
-    alert(`Order confirmed! Payment details have been sent to your email.\n\nAmount: ${formatCurrency(price)}\nAccount: 4890 0101 0059 1001\n\nPlease complete the bank transfer to finalize your order.`);
-    closeCheckout();
+BANK TRANSFER DETAILS:
+Account Number: 4890 0101 0059 1001
+Valid Through: 11/26
+CVV: 128
+
+Please transfer ${formatCurrency(price)} to complete your order.
+
+Delivery will be arranged after payment verification.
+Thank you for your purchase!
+        `;
+        
+        alert(checkoutMessage);
+        closeCheckout();
+    }
 }
 
 // Close modal when clicking outside of it
