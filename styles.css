@@ -7,8 +7,8 @@
     --text-color: #e6e1da;
     --text-muted: #9e9689;
     --border-vintage: rgba(212, 175, 55, 0.35);
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-decorative: 'Cinzel Decorative', serif;
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-decorative: "Cinzel Decorative", serif;
 }
 
 * {
@@ -101,7 +101,6 @@ body {
     padding: 0 1rem;
 }
 
-/* Page Content Display */
 .page-content {
     display: none;
 }
@@ -112,20 +111,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Product Grid - 2 Columns */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
     gap: 2.5rem;
-    max-width: 900px;
+    max-width: 980px;
     margin: 0 auto;
 }
 
@@ -192,14 +186,14 @@ body {
     font-size: 1.05rem;
     color: var(--text-muted);
     line-height: 1.6;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.5rem;
     min-height: 3.2rem;
     font-style: italic;
 }
 
-.product-price {
+.product-price-contact {
     font-family: var(--font-decorative);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--gold-primary);
     letter-spacing: 0.08em;
     margin-bottom: 1rem;
@@ -207,12 +201,13 @@ body {
 
 .product-action {
     display: flex;
-    gap: 0.5rem;
     justify-content: center;
 }
 
-.buy-btn, .ask-price-btn {
-    padding: 0.8rem 1.5rem;
+.contact-price-btn,
+.buy-btn,
+.checkout-btn {
+    padding: 0.8rem 1.2rem;
     border: 1px solid var(--gold-primary);
     background: transparent;
     color: var(--gold-light);
@@ -221,24 +216,16 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     letter-spacing: 0.08em;
-    flex: 1;
+    width: 100%;
 }
 
-.buy-btn:hover {
+.contact-price-btn:hover,
+.buy-btn:hover,
+.checkout-btn:hover {
     background: var(--gold-primary);
     color: #0d0c0a;
 }
 
-.ask-price-btn {
-    background: transparent;
-}
-
-.ask-price-btn:hover {
-    background: rgba(212, 175, 55, 0.1);
-    border-color: var(--gold-light);
-}
-
-/* Content Sections */
 .content-section {
     max-width: 800px;
     margin: 2rem auto;
@@ -270,14 +257,8 @@ body {
 .contact-info a {
     color: var(--gold-primary);
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
-.contact-info a:hover {
-    color: var(--gold-light);
-}
-
-/* Modal/Checkout */
 .modal {
     display: none;
     position: fixed;
@@ -315,11 +296,6 @@ body {
     font-weight: bold;
     color: var(--gold-primary);
     cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-btn:hover {
-    color: var(--gold-light);
 }
 
 .modal-content h2 {
@@ -375,7 +351,6 @@ body {
     border: 1px solid var(--border-vintage);
     padding: 1rem;
     margin-bottom: 1rem;
-    text-align: left;
 }
 
 .bank-details p {
@@ -393,13 +368,12 @@ body {
 .checkout-form {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
 }
 
 .checkout-form label {
     color: var(--gold-light);
     font-weight: 600;
-    margin-bottom: 0.3rem;
     letter-spacing: 0.05em;
 }
 
@@ -411,7 +385,6 @@ body {
     padding: 0.8rem;
     font-family: var(--font-serif);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
 }
 
 .checkout-form input:focus,
@@ -420,28 +393,12 @@ body {
     border-color: var(--gold-primary);
 }
 
-.checkout-form input::placeholder,
-.checkout-form textarea::placeholder {
-    color: var(--text-muted);
-}
-
 .checkout-btn {
+    margin-top: 0.5rem;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
-    border: none;
     color: #0d0c0a;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-family: var(--font-serif);
+    border: none;
     font-weight: 600;
-    cursor: pointer;
-    letter-spacing: 0.1em;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-}
-
-.checkout-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
 .site-footer {
