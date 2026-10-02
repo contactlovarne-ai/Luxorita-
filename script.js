@@ -4,9 +4,9 @@ const products = [
     { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0002.jpg" },
     { name: "Pure 24K Black Gold Bracelet, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0003.jpg" },
     { name: "Pure 24K Yellow Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "$2,200 USD", image: "IMG-20261001-WA0004.jpg" },
-    { name: "Pure 24K Pink Gold Brooch (Diamonds), Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0005.jpg" },
-    { name: "Pure 24K Rose Gold Bracelet, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0006.jpg" },
-    { name: "Pure 24K White Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0007.jpg" },
+    { name: "Pure 24K Yellow Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0005.jpg" },
+    { name: "Pure 24K White Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0006.jpg" },
+    { name: "Pure 24K Rose Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0007.jpg" },
     { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0008.jpg" },
     { name: "Pure 24K Black Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0009.jpg" },
     { name: "White Gold Earrings, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA0010.jpg" },
@@ -21,12 +21,12 @@ const products = [
     { name: "Pure 24K Black Gold Bracelet, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2491.jpg" },
     { name: "Pure 24K Yellow Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2564.jpg" },
     { name: "Pure 24K Yellow Gold Necklace, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2661.jpg" },
-    { name: "Pure 24K Black Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2837.jpg" },
+    { name: "Pure 24K Rose Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA2837.jpg" },
     { name: "Pure 24K Pink Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA3294.jpg" },
     { name: "Pure 24K White Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA3310.jpg" },
     { name: "Pure 24K Rose Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA4372.jpg" },
-    { name: "Pure 24K Black Gold Brooch, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA5326.jpg" },
-    { name: "Pure 24K Pink Gold Earrings, Handcrafted framework exquisitely set with natural unheated diamonds", price: "$2,100 USD", image: "IMG-20261001-WA5407.jpg" }
+    { name: "Pure 24K Black Gold Bracelet, Handcrafted framework exquisitely set with natural unheated diamonds", price: "Contact for Price", image: "IMG-20261001-WA5326.jpg" },
+    { name: "Pure 24K Rose Gold Ring, Handcrafted framework exquisitely set with natural unheated diamonds", price: "$2,100 USD", image: "IMG-20261001-WA5407.jpg" }
 ];
 
 function showPage(pageName) {
