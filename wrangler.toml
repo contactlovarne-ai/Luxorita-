@@ -1,0 +1,19 @@
+name = "luxorita"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[env.production]
+name = "luxorita-prod"
+workers_dev = false
+
+[build]
+command = ""
+cwd = "./"
+watch_paths = []
+
+[build.upload]
+format = "service-worker"
+main = "./index.js"
